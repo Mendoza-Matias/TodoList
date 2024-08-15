@@ -25,9 +25,9 @@ public class TaskServiceImpl implements ITaskServices {
 
     @Override
     public List<Task> getByStateFilter(String state) {
-        if (state.equals("in_progress"))
+        if (state.equals("IN_PROGRESS"))
             return repository.findAllByState(State.IN_PROGRESS);
-        if (state.equals("done"))
+        if (state.equals("DONE"))
             return repository.findAllByState(State.DONE);
         return repository.findAll();
     }

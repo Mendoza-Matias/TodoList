@@ -88,9 +88,9 @@ public interface TaskApi {
 
 
     /**
-     * GET /task/{state} : Get tasks by state filter
+     * GET /task/state : Get tasks by state filter
      *
-     * @param state State to filter tasks by. (required)
+     * @param state State to filter tasks by. (optional)
      * @return OK (status code 200)
      *         or  (status code 400)
      */
@@ -107,11 +107,11 @@ public interface TaskApi {
     )
     @RequestMapping(
         method = RequestMethod.GET,
-        value = "/task/{state}",
+        value = "/task/state",
         produces = { "application/json" }
     )
     ResponseEntity<List<TaskDto>> getTasksByStateFilter(
-        @Parameter(name = "state", description = "State to filter tasks by.", required = true) @PathVariable("state") String state
+        @Parameter(name = "state", description = "State to filter tasks by.") @Valid @RequestParam(value = "state", required = false) String state
     );
 
 

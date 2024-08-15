@@ -42,7 +42,7 @@ paths:
         400:
           $ref: '#/components/schemas/error-dto'
 
-  /task/{state}:
+  /task/state:
     get:
       tags:
         - Task
@@ -50,11 +50,14 @@ paths:
       operationId: getTasksByStateFilter
       parameters:
         - name: state
-          in: path
+          in: query
           description: State to filter tasks by.
-          required: true
+          required: false
           schema:
             type: string
+            enum:
+              - IN_PROGRESS
+              - DONE
       responses:
         200:
           description: OK
