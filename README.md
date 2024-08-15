@@ -27,7 +27,6 @@ Primero, clona el repositorio en tu máquina local:
 
 ```bash
 git clone https://github.com/tuusuario/gestion-tareas.git
-cd gestion-tareas
 ```
 ---
 ### Construir el proyecto 
