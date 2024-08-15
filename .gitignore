@@ -1,0 +1,38 @@
+# Documentación
+HELP.md
+
+# Directorios de compilación
+target/
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Archivos generados por Maven
+!.mvn/wrapper/maven-wrapper.jar
+
+# Archivos de configuración de STS (Spring Tool Suite)
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# Archivos de configuración de IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Archivos de configuración de NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# Archivos de configuración de VS Code
+.vscode/

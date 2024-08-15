@@ -1,0 +1,168 @@
+openapi: 3.0.3
+info:
+  title: Task
+  version: 0.0.1
+tags:
+  - name: Task
+paths:
+  /task:
+    get:
+      tags:
+        - Task
+      summary: Get all tasks
+      operationId: getAllTasks
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/task-dto'
+        404:
+          $ref: '#/components/schemas/error-dto'
+
+    post:
+      tags:
+        - Task
+      summary: Create new task
+      operationId: postCreateNewTask
+      requestBody:
+        description: The task data to create
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/task-dto'
+      responses:
+        201:
+          description: Created
+          content: {}
+        400:
+          $ref: '#/components/schemas/error-dto'
+
+  /task/{state}:
+    get:
+      tags:
+        - Task
+      summary: Get tasks by state filter
+      operationId: getTasksByStateFilter
+      parameters:
+        - name: state
+          in: path
+          description: State to filter tasks by.
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/task-dto'
+        400:
+          $ref: '#/components/schemas/error-dto'
+
+  /task/{id_task}:
+    patch:
+      tags:
+        - Task
+      summary: Modify the state of a task
+      operationId: patchModifyTaskState
+      parameters:
+        - name: id_task
+          in: path
+          description: The ID of the task to modify.
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+        400:
+          $ref: '#/components/schemas/error-dto'
+
+    put:
+      tags:
+        - Task
+      summary: Modify information of a task
+      operationId: putModifyInformationTask
+      parameters:
+        - name: id_task
+          in: path
+          description: The ID of the task to update.
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: The updated task data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/task-dto'
+      responses:
+        200:
+          description: OK
+        400:
+          $ref: '#/components/schemas/error-dto'
+
+    delete:
+      tags:
+        - Task
+      summary: Delete a task
+      operationId: deleteTask
+      parameters:
+        - name: id_task
+          in: path
+          description: The ID of the task to delete.
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        200:
+          description: OK
+        400:
+          $ref: '#/components/schemas/error-dto'
+
+components:
+  responses:
+    task-backend-error:
+      description: TASK Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error-dto'
+  schemas:
+    error-dto:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+    task-dto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        title:
+          type: string
+        description:
+          type: string
+        creationDate:
+          type: string
+          format: date
+        state:
+          type: string
+          enum:
+            - IN_PROGRESS
+            - DONE
